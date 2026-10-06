@@ -6,7 +6,7 @@ from aiogram.types import Message, CallbackQuery, ChatMemberUpdated
 import config, db, utils, commands
 import keyboards as kb
 from states import AddCh
-from handlers import participate
+import participate
 
 router = Router()
 

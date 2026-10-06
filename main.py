@@ -5,7 +5,7 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
 import config, db, utils, commands
-from handlers import owner, user, giveaway, participate
+import owner, user, giveaway, participate
 
 
 class BanMW(BaseMiddleware):

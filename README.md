@@ -6,10 +6,10 @@
 | `main.py` | Bot start, middleware (ban check) |
 | `commands.py` | **Commands menu** - yahin se sab commands/menu/help badlo |
 | `keyboards.py` | Saare buttons / menus |
-| `handlers/user.py` | /start, force join, welcome, channels |
-| `handlers/giveaway.py` | Create flow, Management Panel, End giveaway |
-| `handlers/participate.py` | Participation link flow, vote |
-| `handlers/owner.py` | Owner commands |
+| `user.py` | /start, force join, welcome, channels |
+| `giveaway.py` | Create flow, Management Panel, End giveaway |
+| `participate.py` | Participation link flow, vote |
+| `owner.py` | Owner commands |
 | `db.py`, `utils.py`, `states.py`, `config.py` | Helpers |
 
 ## Commands
@@ -25,4 +25,4 @@
 - Force join: bot ko us channel me admin banao, phir owner se `/addforce @channel`.
   (Join auto-detect ke liye bot ka us channel me admin hona zaroori hai.)
 - Users apne channel me bot ko admin (post permission) bana ke Add Channel karte hain.
-- Voting rule badalna ho: `handlers/participate.py` me `ONE_VOTE_PER_GIVEAWAY`.
+- Voting rule badalna ho: `participate.py` me `ONE_VOTE_PER_GIVEAWAY`.

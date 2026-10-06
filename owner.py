@@ -3,7 +3,7 @@ from aiogram import Router, F
 from aiogram.filters import Command, CommandObject
 from aiogram.types import Message
 import config, db, utils
-from handlers import giveaway
+import giveaway
 
 router = Router()
 router.message.filter(F.from_user.id == config.OWNER_ID)  # sirf owner
