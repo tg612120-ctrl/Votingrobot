@@ -1,4 +1,6 @@
+import re
 from datetime import datetime
+from aiogram.exceptions import TelegramBadRequest
 from aiogram import Router, F
 from aiogram.filters import Command, CommandStart, CommandObject
 from aiogram.fsm.context import FSMContext
@@ -17,19 +19,26 @@ HOWTO = ("📖 <b>How to Use</b>\n\n1️⃣ Add this bot as <b>admin</b> in your
 
 
 async def welcome(bot, chat_id, u):
-    ce, A = utils.ce, utils.ce(utils.E_ARROW, "▸")
+    ce, A = utils.ce, utils.ce(utils.E_ARROW, "🔹")  # fallback must be a real emoji
     text = (f"{ce(utils.E_WAVE, '👋')} <b>Welcome, {utils.esc(u.full_name)}!</b>\n\n"
             f"{A} <b>Name:</b> {utils.esc(u.full_name)}\n"
             f"{A} <b>User ID:</b> <code>{u.id}</code>\n"
             f"{A} <b>Username:</b> {utils.esc('@' + u.username if u.username else 'None')}\n\n"
             f"{ce(utils.E_GIFT, '🎁')} Create and manage vote giveaways in your channels.")
-    if config.BANNER:
+    for plain in (False, True):  # 2nd try = normal emojis if premium emoji fails
+        t = re.sub(r'<tg-emoji emoji-id="\d+">(.*?)</tg-emoji>', r'\1', text) if plain else text
+        markup = kb.main_menu(plain)
+        if config.BANNER:
+            try:
+                await bot.send_photo(chat_id, config.BANNER, caption=t, reply_markup=markup)
+                return
+            except Exception:
+                pass
         try:
-            await bot.send_photo(chat_id, config.BANNER, caption=text, reply_markup=kb.main_menu())
+            await bot.send_message(chat_id, t, reply_markup=markup)
             return
-        except Exception:
-            pass
-    await bot.send_message(chat_id, text, reply_markup=kb.main_menu())
+        except TelegramBadRequest:
+            continue
 
 
 async def verify(bot, u, auto=False):

@@ -2,13 +2,15 @@ from aiogram.types import InlineKeyboardMarkup as M, InlineKeyboardButton as B
 import utils
 
 
-def main_menu():
+def main_menu(plain=False):
+    def btn(text, cb, eid, emoji):
+        if plain:
+            return B(text=f"{emoji} {text}", callback_data=cb)
+        return B(text=text, callback_data=cb, icon_custom_emoji_id=eid)
     return M(inline_keyboard=[
-        [B(text="New Giveaway", callback_data="new", icon_custom_emoji_id=utils.E_GIFT),
-         B(text="My Giveaways", callback_data="mg", icon_custom_emoji_id=utils.E_MYGW)],
-        [B(text="How to Use", callback_data="howto", icon_custom_emoji_id=utils.E_HOWTO)],
-        [B(text="My Channels", callback_data="mych", icon_custom_emoji_id=utils.E_MYCH),
-         B(text="Add Channel", callback_data="addch", icon_custom_emoji_id=utils.E_ADDCH)],
+        [btn("New Giveaway", "new", utils.E_GIFT, "🎁"), btn("My Giveaways", "mg", utils.E_MYGW, "📋")],
+        [btn("How to Use", "howto", utils.E_HOWTO, "📖")],
+        [btn("My Channels", "mych", utils.E_MYCH, "📊"), btn("Add Channel", "addch", utils.E_ADDCH, "➕")],
     ])
 
 
