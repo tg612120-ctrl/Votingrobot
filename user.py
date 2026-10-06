@@ -17,11 +17,12 @@ HOWTO = ("📖 <b>How to Use</b>\n\n1️⃣ Add this bot as <b>admin</b> in your
 
 
 async def welcome(bot, chat_id, u):
-    text = (f"👋 <b>Welcome, {utils.esc(u.full_name)}!</b>\n\n"
-            f"▸ <b>Name:</b> {utils.esc(u.full_name)}\n"
-            f"▸ <b>User ID:</b> <code>{u.id}</code>\n"
-            f"▸ <b>Username:</b> {utils.esc('@' + u.username if u.username else 'None')}\n\n"
-            f"🎁 Create and manage vote giveaways in your channels.")
+    ce, A = utils.ce, utils.ce(utils.E_ARROW, "▸")
+    text = (f"{ce(utils.E_WAVE, '👋')} <b>Welcome, {utils.esc(u.full_name)}!</b>\n\n"
+            f"{A} <b>Name:</b> {utils.esc(u.full_name)}\n"
+            f"{A} <b>User ID:</b> <code>{u.id}</code>\n"
+            f"{A} <b>Username:</b> {utils.esc('@' + u.username if u.username else 'None')}\n\n"
+            f"{ce(utils.E_GIFT, '🎁')} Create and manage vote giveaways in your channels.")
     if config.BANNER:
         try:
             await bot.send_photo(chat_id, config.BANNER, caption=text, reply_markup=kb.main_menu())

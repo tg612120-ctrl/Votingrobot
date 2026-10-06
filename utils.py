@@ -7,6 +7,19 @@ BOT_ID = 0
 esc = html.escape
 OK = ("member", "administrator", "creator")
 
+# ---- PREMIUM EMOJI IDs (yahin se badlo) ----
+E_WAVE = "5366546685570869311"    # welcome heading
+E_ARROW = "5447181973544008180"   # bullets
+E_GIFT = "5208583436305976378"    # gift (text + New Giveaway button)
+E_MYGW = "5877597667231534929"    # My Giveaways button
+E_MYCH = "5042290883949495533"    # My Channels button
+E_HOWTO = "5127736337725653908"   # How to Use button
+E_ADDCH = "5391112824762166810"   # Add Channel button
+
+
+def ce(emoji_id, fallback):
+    return f'<tg-emoji emoji-id="{emoji_id}">{fallback}</tg-emoji>'
+
 
 def new_id():
     return secrets.token_urlsafe(6)
